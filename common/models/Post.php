@@ -21,6 +21,9 @@ use Yii;
  */
 class Post extends \yii\db\ActiveRecord
 {
+    const STATUS_DRAFT = 0;
+    const STATUS_PUBLISHED = 10;
+    const STATUS_REJECTED = 20;
     /**
      * {@inheritdoc}
      */
@@ -34,7 +37,7 @@ class Post extends \yii\db\ActiveRecord
      */
     public function rules() {
         return [
-            [['title', 'text', 'post_category_id', 'status'], 'required'], // Обязательные поля
+            [['title', 'user_id', 'text', 'post_category_id', 'status'], 'required'], // Обязательные поля
             ['title', 'string', 'max' => 255], // Максимальная длина для заголовка
             ['text', 'string'], // Проверка на строку для текста
             ['user_id', 'integer'], // Проверка на целое число для категории
@@ -80,4 +83,24 @@ class Post extends \yii\db\ActiveRecord
     public function getUploadAtFormatted() {
         return date('Y-m-d H:i:s', $this->upload_at);
     }
+    public static function getStatusLabels() {
+        return [
+            self::STATUS_DRAFT => Yii::t('app', 'Новый'),
+            self::STATUS_PUBLISHED => Yii::t('app', 'Опубликован'),
+            self::STATUS_REJECTED => Yii::t('app', 'Отклонен'),
+        ];
+    }
+
+    public function getCategoryName() {
+        // Предполагается, что у вас есть модель Category
+        $category = PostCategory::findOne($this->post_category_id);
+        return $category ? $category->Название : Yii::t('app', 'Неизвестная категория');
+    }
+
+    public function getStatusName() {
+        $statusLabels = self::getStatusLabels();
+        return isset($statusLabels[$this->status]) ? $statusLabels[$this->status] : Yii::t('app', 'Неизвестный статус');
+    }
+
+
 }
