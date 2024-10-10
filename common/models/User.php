@@ -204,7 +204,7 @@ class User extends ActiveRecord implements IdentityInterface
         if (!$email) {
             return null;
         }
-        return UserExt::getByEmail($email, false)?->user;
+        return UserExt::getByEmail($email, true)?->user;
     }
 
     public static function getUserByUsername($username): ?self
