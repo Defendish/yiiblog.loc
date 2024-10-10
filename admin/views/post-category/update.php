@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var common\models\PostCategory $model */
 
-$this->title =  Yii::t('app','Update Post Category: ' . $model->id);
+$this->title =  Yii::t('app','Update Post Category: ' ). $model->id;
 $this->params['breadcrumbs'][] = ['label' =>  Yii::t('app','Post Categories'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] =  Yii::t('app','Update');

@@ -28,11 +28,8 @@ use common\models\PostStatus;
 
     <?= $form->field($model, 'status')->dropDownList(PostStatus::getList(), ['prompt' => 'Выберите статус']) ?>
 
-    <?= $form->field($model, 'image')->textInput(['maxlength' => true]) ?>
 
-    <!--<?= $form->field($model, 'created_at')->textInput() ?>--!>
-
-    <!--<?= $form->field($model, 'upload_at')->textInput() ?>--!>
+    <?= $form->field($model, 'imageFile')->fileInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>

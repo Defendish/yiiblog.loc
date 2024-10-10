@@ -17,7 +17,7 @@ class PostSearch extends Post
     public function rules()
     {
         return [
-            [['id','user_id', 'post_category_id', 'status', 'created_at', 'upload_at'], 'integer'],
+            [['id','user_id', 'post_category_id', 'status', 'created_at', 'updated_at'], 'integer'],
             [['title', 'text', 'image'], 'safe'],
         ];
     }
@@ -40,7 +40,7 @@ class PostSearch extends Post
      */
     public function search($params)
     {
-        $query = Post::find();
+        $query = Post::find()->with('postCategory');
 
         // add conditions that should always apply here
 
@@ -63,7 +63,7 @@ class PostSearch extends Post
             'post_category_id' => $this->post_category_id,
             'status' => $this->status,
             'created_at' => $this->created_at,
-            'upload_at' => $this->upload_at,
+            'updated_at' => $this->updated_at,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])

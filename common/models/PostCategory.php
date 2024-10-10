@@ -9,7 +9,7 @@ use Yii;
  * This is the model class for table "PostCategory".
  *
  * @property int $id
- * @property string $Название
+ * @property string $name
  */
 class PostCategory extends \yii\db\ActiveRecord
 {
@@ -27,12 +27,12 @@ class PostCategory extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Название'], 'required'],
-            [['Название'], 'string', 'max' => 255],
+            [['name'], 'required'],
+            [['name'], 'string', 'max' => 255],
         ];
     }
     public static function getList() {
-        return ArrayHelper::map(self::find()->all(), 'id', 'Название');
+        return ArrayHelper::map(self::find()->all(), 'id', 'name');
     }
 
     /**
@@ -42,7 +42,7 @@ class PostCategory extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'Название' => 'Название',
+            'name' => Yii::t('app','Name'),
         ];
     }
 }

@@ -18,7 +18,7 @@ class PostCategorySearch extends PostCategory
     {
         return [
             [['id'], 'integer'],
-            [['Название'], 'safe'],
+            [['name'], 'safe'],
         ];
     }
 
@@ -61,7 +61,7 @@ class PostCategorySearch extends PostCategory
             'id' => $this->id,
         ]);
 
-        $query->andFilterWhere(['like', 'Название', $this->Название]);
+        $query->andFilterWhere(['like', 'Название', $this->name]);
 
         return $dataProvider;
     }

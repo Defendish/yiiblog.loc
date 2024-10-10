@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'status',
             'image',
             'created_at:datetime',
-            'upload_at:datetime',
+            'updated_at:datetime',
         ],
     ])
     ?>

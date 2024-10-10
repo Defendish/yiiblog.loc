@@ -21,7 +21,7 @@ class m241008_143436_create_Post_table extends Migration
             'status'=> $this->integer(),
             'image'=> $this->string(),
             'created_at'=> $this->integer(),
-            'upload_at'=> $this->integer(),
+            'updated_at'=> $this->integer(),
         ]);
     }
 

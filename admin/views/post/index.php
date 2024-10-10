@@ -33,27 +33,33 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'text:ntext',
 
-            // Отображение названия категории вместо ID
+            // Сортировка по категории
             [
                 'attribute' => 'post_category_id',
                 'label' => Yii::t('app', 'Категория поста'),
-                'value' => function ($model) {
-                    return $model->getCategoryName(); // Получаем название категории
+                'value' => function (Post $model) {
+                    return $model->getCategoryName(); // Получаем name категории
                 },
+                // Указываем, что это поле можно сортировать
+                'filter' => \yii\helpers\ArrayHelper::map(\common\models\PostCategory::find()->all(), 'id', 'name'), // Предполагается, что у вас есть модель Category с полем name
+                'contentOptions' => ['style' => 'width: 200px;'], // Настройка ширины столбца (по желанию)
             ],
 
-            // Отображение статуса вместо числа
+            // Сортировка по статусу
             [
                 'attribute' => 'status',
                 'label' => Yii::t('app', 'Статус'),
                 'value' => function ($model) {
                     return $model->getStatusName(); // Получаем название статуса
                 },
+                // Указываем, что это поле можно сортировать
+                'filter' => Post::getStatusLabels(), // Используем метки статусов для фильтрации
+                'contentOptions' => ['style' => 'width: 150px;'], // Настройка ширины столбца (по желанию)
             ],
 
             //'image',
             //'created_at',
-            //'upload_at',
+            //'updated_at',
 
             [
                 'class' => ActionColumn::className(),

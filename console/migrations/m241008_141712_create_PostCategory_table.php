@@ -14,11 +14,11 @@ class m241008_141712_create_PostCategory_table extends Migration
     {
         $this->createTable('PostCategory', [
             'id' => $this->primaryKey(), // Определение первичного ключа id
-            'Название' => $this->string(255)->notNull(), // Поле для названия категории
+            'name' => $this->string(255)->notNull(), // Поле для названия категории
         ]);
 
         // Вставка начальных данных
-        $this->batchInsert('PostCategory', ['Название'], [
+        $this->batchInsert('PostCategory', ['name'], [
             ['Спорт'],
             ['Еда'],
             ['Фото'],

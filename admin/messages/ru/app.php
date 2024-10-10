@@ -17,6 +17,10 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+
+    'name'=>'Название',
+    'Name'=>'Название',
+    'Update Post Category: ' =>'Изменить категорию:',
     'Update Text: ' =>'Изменить тест:',
     'Create Post Category' =>'Создать категорию',
     'Post Categories' => 'Категории постов',
@@ -32,7 +36,7 @@ return [
     'status' =>'Статус',
     'image' =>'Изображение',
     'created_at' =>'Дата создания',
-    'upload_at' => 'Дата обновления',
+    'updated_at' => 'Дата обновления',
     'Auth source' => 'Способ авторизации',
     'Access Token' => 'Токен доступа',
     'Add Promocode' => 'Добавить промо-код',
