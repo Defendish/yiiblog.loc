@@ -39,6 +39,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'created_at:datetime',
             'upload_at:datetime',
         ],
-    ]) ?>
+    ])
+    ?>
+
+
+    <p><strong><?= Yii::t('app', 'Дата создания:') ?></strong> <?= date('Y-m-d H:i:s', $model->created_at) ?></p>
+    <p><strong><?= Yii::t('app', 'Дата обновления:') ?></strong> <?= date('Y-m-d H:i:s', $model->upload_at) ?></p>
+
 
 </div>

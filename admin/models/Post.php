@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+use common\models\PostCategory;
 use common\models\PostStatus;
 use Yii;
 

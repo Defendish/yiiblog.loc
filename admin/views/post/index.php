@@ -32,19 +32,40 @@ $this->params['breadcrumbs'][] = $this->title;
             'user_id',
             'title',
             'text:ntext',
-            'post_category_id',
-            'status',
+
+            // Отображение названия категории вместо ID
+            [
+                'attribute' => 'post_category_id',
+                'label' => Yii::t('app', 'Категория поста'),
+                'value' => function ($model) {
+                    return $model->getCategoryName(); // Получаем название категории
+                },
+            ],
+
+            // Отображение статуса вместо числа
+            [
+                'attribute' => 'status',
+                'label' => Yii::t('app', 'Статус'),
+                'value' => function ($model) {
+                    return $model->getStatusName(); // Получаем название статуса
+                },
+            ],
+
             //'image',
             //'created_at',
             //'upload_at',
+
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Post $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                }
             ],
         ],
-    ]); ?>
+    ]);
+    ?>
+
+
 
 
 </div>
