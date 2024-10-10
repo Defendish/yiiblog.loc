@@ -35,7 +35,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'text:ntext',
             'post_category_id',
             'status',
-            'image',
+            [
+                'attribute' => 'image',
+                'format' => 'raw', // Указываем, что формат будет "сырой" для HTML
+                'value' => function ($model) {
+                    return $model->image ? Html::img('/' . $model->image, ['alt' => 'Изображение поста', 'style' => 'width: auto; height: auto']) : Yii::t('app', 'Нет изображения');
+                },
+            ],
             'created_at:datetime',
             'updated_at:datetime',
         ],
