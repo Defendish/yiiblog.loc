@@ -10,7 +10,7 @@ use yii\grid\GridView;
 /** @var common\models\PostCategorySearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Post Categories';
+$this->title = Yii::t('app', 'Категории');;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="post-category-index">
@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Post Category', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app','Create Post Category'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>

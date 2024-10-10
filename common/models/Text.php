@@ -41,8 +41,8 @@ class Text extends ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'key' => Yii::t('app', 'Key'),
-            'value' => Yii::t('app', 'Value'),
+            'key' => Yii::t('app', 'Ключ'),
+            'value' => Yii::t('app', 'Значение'),
         ];
     }
 }

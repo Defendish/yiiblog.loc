@@ -15,6 +15,8 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
+    <?= $form->field($model, 'id') ?>
+
     <?= $form->field($model, 'user_id') ?>
 
     <?= $form->field($model, 'title') ?>
@@ -32,8 +34,8 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'upload_at') ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
+        <?= Html::submitButton(Yii::t('Search', ['class' => 'btn btn-primary'])) ?>
+        <?= Html::resetButton(Yii::t('Reset', ['class' => 'btn btn-outline-secondary'])) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

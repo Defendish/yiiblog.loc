@@ -13,7 +13,8 @@ class m241008_143436_create_Post_table extends Migration
     public function safeUp()
     {
         $this->createTable('Post', [
-            'user_id' => $this->primaryKey(),
+            'id' => $this->primaryKey(),
+            'user_id' => $this->integer(),
             'title'=> $this->string(),
             'text'=> $this->text(),
             'post_category_id'=> $this->integer(),

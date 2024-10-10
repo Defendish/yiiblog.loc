@@ -41,9 +41,9 @@ class Setting extends ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'parameter' => Yii::t('app', 'Parameter'),
-            'value' => Yii::t('app', 'Value'),
-            'description' => Yii::t('app', 'Description'),
+            'parameter' => Yii::t('app', 'Параметр'),
+            'value' => Yii::t('app', 'Значение'),
+            'description' => Yii::t('app', 'Описание'),
         ];
     }
 }

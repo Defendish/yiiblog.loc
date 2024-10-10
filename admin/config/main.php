@@ -22,7 +22,7 @@ $params = array_merge(
 
 return [
     'id' => 'app-admin',
-    'name' => 'PROJECT NAME',
+    'name' => 'Админка',
     'homeUrl' => $baseUrl . $module,
     'basePath' => dirname(__DIR__),
     //    'defaultRoute' => '/site/index',
@@ -153,7 +153,7 @@ return [
             'thousandSeparator' => ' ',
             'currencyCode' => 'RUB',
             'dateFormat' => 'php: d/m/Y',
-            'datetimeFormat' => 'php: d/m/Y H:i',
+            'datetimeFormat' => 'php: d.m.Y H:i',
         ],
 
         'urlManager' => [

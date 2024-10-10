@@ -49,14 +49,14 @@ class PostController extends Controller
 
     /**
      * Displays a single Post model.
-     * @param int $user_id User ID
+     * @param int $id User ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($user_id)
+    public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($user_id),
+            'model' => $this->findModel($id),
         ]);
     }
 
@@ -69,12 +69,10 @@ class PostController extends Controller
     {
         $model = new Post();
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'user_id' => $model->user_id]);
+        if ($model->load($this->request->post())) {
+            if ($model->validate() && $model->save()) { // Проверка на валидацию
+                return $this->redirect(['view', 'id' => $model->id]);
             }
-        } else {
-            $model->loadDefaultValues();
         }
 
         return $this->render('create', [
@@ -85,16 +83,18 @@ class PostController extends Controller
     /**
      * Updates an existing Post model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $user_id User ID
+     * @param int $id User ID
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($user_id)
-    {
-        $model = $this->findModel($user_id);
+    public function actionUpdate($id) {
+        $model = Post::findOne($id);
+        if ($model === null) {
+            throw new NotFoundHttpException('The requested post does not exist.');
+        }
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'user_id' => $model->user_id]);
+        if ($model->load($this->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
@@ -105,13 +105,13 @@ class PostController extends Controller
     /**
      * Deletes an existing Post model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $user_id User ID
+     * @param int $id User ID
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($user_id)
+    public function actionDelete($id)
     {
-        $this->findModel($user_id)->delete();
+        $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
@@ -119,13 +119,13 @@ class PostController extends Controller
     /**
      * Finds the Post model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $user_id User ID
+     * @param int $id User ID
      * @return Post the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($user_id)
+    protected function findModel($id)
     {
-        if (($model = Post::findOne(['user_id' => $user_id])) !== null) {
+        if (($model = Post::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

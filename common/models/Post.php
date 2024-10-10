@@ -9,7 +9,7 @@ use Yii;
 
 /**
  * This is the model class for table "Post".
- *
+ * @property int $id
  * @property int $user_id
  * @property string|null $title
  * @property string|null $text
@@ -32,12 +32,14 @@ class Post extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            [['text'], 'string'],
-            [['post_category_id', 'status', 'created_at', 'upload_at'], 'integer'],
-            [['title', 'image'], 'string', 'max' => 255],
+            [['title', 'text', 'post_category_id', 'status'], 'required'], // Обязательные поля
+            ['title', 'string', 'max' => 255], // Максимальная длина для заголовка
+            ['text', 'string'], // Проверка на строку для текста
+            ['user_id', 'integer'], // Проверка на целое число для категории
+            ['post_category_id', 'integer'], // Проверка на целое число для категории
+            ['status', 'integer'], // Проверка на целое число для статуса
         ];
     }
 
@@ -47,14 +49,15 @@ class Post extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'user_id' => 'User ID',
-            'title' => 'Title',
-            'text' => 'Text',
-            'post_category_id' => 'Post Category ID',
-            'status' => 'Status',
-            'image' => 'Image',
-            'created_at' => 'Created At',
-            'upload_at' => 'Upload At',
+            'id' => Yii::t('app', 'Идентификатор'),
+            'user_id' => Yii::t('app', 'ID пользователя'),
+            'title' => Yii::t('app', 'Заголовок'),
+            'text' => Yii::t('app', 'Текст'),
+            'post_category_id' => Yii::t('app', 'Категория поста'),
+            'status' => Yii::t('app', 'Статус'),
+            'image' => Yii::t('app', 'Изображение'),
+            'created_at' => Yii::t('app', 'Дата создания'),
+            'upload_at' => Yii::t('app', 'Дата обновления'),
         ];
     }
     public function getStatusText() {

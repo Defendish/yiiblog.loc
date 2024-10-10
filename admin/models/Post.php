@@ -6,7 +6,7 @@ use Yii;
 
 /**
  * This is the model class for table "Post".
- *
+ * @property int $id
  * @property int $user_id
  * @property string|null $title
  * @property string|null $text
@@ -44,6 +44,7 @@ class Post extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
+            'id' => 'ID',
             'user_id' => 'User ID',
             'title' => 'Title',
             'text' => 'Text',
