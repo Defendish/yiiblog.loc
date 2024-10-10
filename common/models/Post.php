@@ -54,7 +54,7 @@ class Post extends \yii\db\ActiveRecord
             ['status', 'integer'], // Проверка на целое число для статуса
 
             [['image'], 'string'], // Убедитесь, что поле image является строкой
-            [['imageFile'], 'file', 'skipOnEmpty' => false,'extensions' => 'png, jpg, jpeg', 'maxSize' => 1024 * 1024]
+            [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg', 'maxSize' => 1024 * 1024]
         ];
     }
 
@@ -76,6 +76,18 @@ class Post extends \yii\db\ActiveRecord
         ];
     }
 
+    public function fields(): array
+    {
+        return [
+            'id',
+            'title',
+            'text',
+            'post_category' => fn() => $this->postCategory->name,
+            'image' => fn() => Yii::$app->request->hostInfo . '/' . $this->image,
+            'created_at' => fn() => Yii::$app->formatter->asDatetime($this->created_at)
+        ];
+    }
+
     public function beforeValidate(): bool
     {
         $this->imageFile = UploadedFile::getInstance($this, 'imageFile');
@@ -86,7 +98,7 @@ class Post extends \yii\db\ActiveRecord
     {
         if ($this->imageFile instanceof UploadedFile) {
             // Удаляем старое изображение, если оно существует
-            if ( $this->image !== null) {
+            if ($this->image !== null) {
                 $this->deleteImage(); // Удаляем старое изображение
             }
 
@@ -102,7 +114,9 @@ class Post extends \yii\db\ActiveRecord
         }
         return parent::beforeSave($insert);
     }
-    public function deleteImage() {
+
+    public function deleteImage()
+    {
         if ($this->image) {
             $imagePath = Yii::getAlias('@public/') . $this->image;
             if (file_exists($imagePath)) {
