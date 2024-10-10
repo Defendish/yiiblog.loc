@@ -1,7 +1,7 @@
 <?php
 
 namespace app\models;
-
+use common\models\PostStatus;
 use Yii;
 
 /**
@@ -52,6 +52,11 @@ class Post extends \yii\db\ActiveRecord
             'image' => 'Image',
             'created_at' => 'Created At',
             'upload_at' => 'Upload At',
+        ];
+    }
+    public function actionGetStatuses() {
+        return [
+            'statuses' => PostStatus::getApiList(),
         ];
     }
 }

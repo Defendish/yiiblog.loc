@@ -1,6 +1,9 @@
 <?php
 
 namespace common\models;
+use yii\db\ActiveRecord;
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
 
 use Yii;
 
@@ -53,5 +56,25 @@ class Post extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'upload_at' => 'Upload At',
         ];
+    }
+    public function getStatusText() {
+        return PostStatus::getText($this->status);
+    }
+    public function behaviors() {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'upload_at',
+                'value' => time(), // Используем NOW() для установки текущего времени
+            ],
+        ];
+    }
+    public function getCreatedAtFormatted() {
+        return date('Y-m-d H:i:s', $this->created_at);
+    }
+
+    public function getUploadAtFormatted() {
+        return date('Y-m-d H:i:s', $this->upload_at);
     }
 }

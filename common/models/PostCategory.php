@@ -1,7 +1,8 @@
 <?php
 
 namespace common\models;
-
+use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 use Yii;
 
 /**
@@ -29,6 +30,9 @@ class PostCategory extends \yii\db\ActiveRecord
             [['Название'], 'required'],
             [['Название'], 'string', 'max' => 255],
         ];
+    }
+    public static function getList() {
+        return ArrayHelper::map(self::find()->all(), 'id', 'Название');
     }
 
     /**
